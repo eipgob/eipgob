@@ -1,0 +1,40 @@
+#include <fstream>
+
+using namespace std;
+
+ifstream fin ("1b.in");
+ofstream fout("1b.out");
+
+long long sum,xmod,imod,nmod;
+bool ex[2][10001];
+long long vmod[10001];
+
+int main()
+{
+    while (fin>>xmod)
+    {
+        vmod[++nmod]=xmod;
+    }
+
+    ex[1][0]=1;
+    for (imod=1;imod<=nmod;++imod)
+    {
+        sum+=vmod[imod];
+
+        ex[1][-1]=1;
+
+        if (ex[(sum>=0)][sum])
+        {
+            fout << sum;
+            return 0;
+        }
+        ex[(sum>=0)][sum]=1;
+        if (imod==nmod)
+        {
+            imod=0;
+        }
+    }
+
+    return 0;
+}
+
